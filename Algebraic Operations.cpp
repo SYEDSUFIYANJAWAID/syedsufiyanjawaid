@@ -1,34 +1,21 @@
 #include <stdio.h>
 #include <math.h>
-
-int add(int a, int b) {
-    return a + b;
-}
-
-int subtract(int a, int b) {
-    return a - b;
-}
-
-int multiply(int a, int b) {
-    return a * b;
-}
-
-float divide(int a, int b) {
-    if(b == 0) {
-        printf("Error: Division by zero is not allowed.\n");
-        return 0;
+double customLog(double a, double b) {
+    if (a <= 0 || b <= 0) {
+        printf("Error: Invalid input\n");
+        return -1;
     }
-    return (float)a / b;
+    return log(a) / log(b);
 }
+
 int main() {
     int choice;
 do{
   printf("Welcome to the C Scientific Calculator!\n");
 printf("\nAvailable Operations:\n");
-printf("1. Addition (+)\n");
-printf("2. Subtraction (-)\n");
-printf("3. Multiplication (*)\n");
-printf("4. Division (/)\n");
+printf("1. Logarithm (base 10)\n");
+printf("2. Natural Logarithm (base e)\n");
+printf("3. Custom Base Logarithm\n");
 
 int num1, num2 , base;
     float float1, float2;
@@ -37,41 +24,51 @@ printf("\nEnter your choice: ");
   scanf("%d", &choice);
 
 switch (choice){
+case 1:
+{     
+double num, result;
 
-  case 1:
-  
-    printf("Enter first number: ");
-    scanf("%d", &num1);
-    printf("Enter second number: ");
-    scanf("%d", &num2);
-    printf("Addition: %d\n", add(num1, num2));
-   break;
+    printf("Enter a number: ");
+    scanf("%lf", &num);
+
+    if(num <= 0) {
+        printf("Invalid input. The number should be greater than 0.\n");
+    } else {
+        result = log10(num);
+        printf("The Logarithm (base 10) of %.2lf is %.4lf.\n", num, result);
+    }
+    }
+    break;
     
-  case 2:
-    printf("Enter first number: ");
-    scanf("%d", &num1);
-    printf("Enter second number: ");
-    scanf("%d", &num2);
-    printf("Subtraction: %d\n", subtract(num1, num2));
-    break;
-  
+case 2:
+       {
+    double num, result;
+
+    printf("Enter a number: ");
+    scanf("%lf", &num);
+
+    result = log(num); // calculates the natural logarithm of num
+
+    printf("The natural logarithm of %.2lf is %.2lf\n", num, result);
+
+    return 0;
+}
+break;
+         
   case 3:
-    printf("Enter first number: ");
-    scanf("%d", &num1);
-    printf("Enter second number: ");
-    scanf("%d", &num2);
-    printf("Multiplication: %d\n", multiply(num1, num2));
+{
+    double a, b;
+    printf("Enter the number: ");
+    scanf("%lf", &a);
+    printf("Enter the base: ");
+    scanf("%lf", &b);
+    double result = customLog(a, b);
+    if (result != -1) {
+        printf("logb a = %.4f\n", result);
+    }
+    }
     break;
-
-case 4:
-    printf("Enter first number: ");
-    scanf("%d", &num1);
-    printf("Enter second number: ");
-    scanf("%d", &num2);
-    printf("Division: %.2f\n", divide(num1, num2));
-    break;
-
-     }
+}
 }while(choice != 0);
  
 
